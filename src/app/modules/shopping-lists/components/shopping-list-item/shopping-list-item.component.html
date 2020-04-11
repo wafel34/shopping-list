@@ -1,0 +1,24 @@
+<div *ngIf="item.status==='for_buying'">
+
+  <mat-expansion-panel
+    *ngIf="item.description"
+    class="list-item mw-100 m-2 w-auto"
+    [ngClass]="{'fade-out': animationState === STATE_HIDDEN, 'fade-in': animationState === STATE_VISIBLE}"
+    (swipeleft)="startAnimation(STATE_HIDDEN)">
+    <mat-expansion-panel-header>
+      <span>{{item.name}}</span>
+      <span class="ml-auto mr-2">{{item.quantity}}</span>
+    </mat-expansion-panel-header>
+    <span>{{item.description}}</span>
+  </mat-expansion-panel>
+
+  <mat-list-item
+    *ngIf="!item.description"
+    class="list-item mw-100 m-2 w-auto"
+    [ngClass]="{'fade-out': animationState === STATE_HIDDEN, 'fade-in': animationState === STATE_VISIBLE}"
+    (swipeleft)="startAnimation(STATE_HIDDEN)">
+    <span>{{item.name}}</span>
+    <span class="ml-auto mr-4">{{item.quantity}}</span>
+  </mat-list-item>
+
+</div>

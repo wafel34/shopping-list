@@ -1,0 +1,16 @@
+<div *ngIf="shoppingList$ | async as shoppingList">
+    <div class="font-weight-bold mx-3 mt-2 mb-0 d-flex justify-content-between">
+        <span>Produkt</span>
+        <span class="ml-auto mr-3">Ilość</span>
+    </div>
+    <mat-list *ngFor="let category of shoppingList.groups">
+        <mat-list-item class="font-weight-bold">
+            {{category.group}}
+        </mat-list-item>
+        <app-shopping-list-item
+            *ngFor="let item of category.items"
+            [item]="item"
+            (itemRemovedFromList)="onItemRemovedFromList($event)"
+            (itemReAddedToTheList)="onItemReAddedToTheList($event)"></app-shopping-list-item>
+    </mat-list>
+</div>
