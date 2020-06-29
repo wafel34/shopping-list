@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ShoppingListRepositoryService } from '../repositories/shopping-list/shopping-list-repository.service';
+import { ShoppingListRepositoryService } from '../../repositories/shopping-list/shopping-list-repository.service';
 import {  BehaviorSubject, Observable } from 'rxjs';
 import { IShoppingList } from 'src/app/shared/models/shopping-list/shopping-list';
 import { IShoppingListItem } from 'src/app/shared/models/shopping-list/shopping-list-item';
@@ -15,8 +15,8 @@ export class ShoppingListService {
 
   }
 
-  getSingleList(): Observable<IShoppingList> {
-    const result =  this.shoppingListRepository.getList('');
+  getSingleList(id: string): Observable<IShoppingList> {
+    const result =  this.shoppingListRepository.getList(id);
 
     result.subscribe(list => this.setSingleListValue(list));
 
@@ -31,11 +31,18 @@ export class ShoppingListService {
     ];
 
     const newOb = {
-      status: this.getSingleListValue().status,
       items: newArr
     };
 
     this.setSingleListValue(newOb);
+  }
+
+  getShoppingLists(userName: string) {
+    return this.shoppingListRepository.getLists(userName);
+  }
+
+  removeList(id: string) {
+    return this.shoppingListRepository.removeList(id)
   }
 
   private getSingleListValue() {

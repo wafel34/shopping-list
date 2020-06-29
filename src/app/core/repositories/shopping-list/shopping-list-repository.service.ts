@@ -14,4 +14,12 @@ export class ShoppingListRepositoryService {
     return this.httpService.get<IShoppingList>(`shopping-lists/${id}`);
   }
 
+  getLists(userName: string): Observable<IShoppingList[]> {
+    return this.httpService.get<IShoppingList[]>(`${userName}/shopping-lists`);
+  }
+
+  removeList(id: string): Observable<IShoppingList> {
+    return this.httpService.delete<IShoppingList>(`shopping-lists/${id}`);
+  }
+
 }

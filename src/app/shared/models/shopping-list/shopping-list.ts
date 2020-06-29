@@ -1,6 +1,8 @@
 import { IShoppingListItem } from './shopping-list-item';
 
 export interface IShoppingList {
-    status: string;
+    id: number;
+    date: Date;
+    name: string;
     items: IShoppingListItem[];
 }

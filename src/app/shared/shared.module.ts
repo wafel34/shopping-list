@@ -5,6 +5,7 @@ import { LayoutDefaultComponent } from './layout/layout-default/layout-default.c
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatCardModule,
     RouterModule
   ],
   exports: [
@@ -28,7 +30,8 @@ import { RouterModule } from '@angular/router';
     MatToolbarModule,
     MatListModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ]
 })
 export class SharedModule { }
