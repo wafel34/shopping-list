@@ -1,5 +1,14 @@
 <mat-toolbar color="primary">
-    <button routerLink="/shopping-lists" mat-raised-button>Listy</button>
-    <button mat-raised-button>+</button>
+
+    <div class="w-100 d-flex" *ngIf="authService.user$ | async as user; else test">
+        <button routerLink="/shopping-lists" mat-raised-button>Listy</button>
+        <button mat-raised-button>+</button>
+        <button class="ml-auto" mat-mini-fab (click)="authService.signOut()">
+            <img class="layout__photo" src="{{user.photoURL}}" alt="">
+        </button>
+    </div>
+    <ng-template #test>
+        <button class="ml-auto" mat-raised-button (click)="authService.googleSignIn()">Zaloguj</button>
+    </ng-template>
 </mat-toolbar>
 <router-outlet></router-outlet>

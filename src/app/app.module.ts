@@ -14,12 +14,23 @@ import { APP_ROUTES } from './app.routes';
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { CoreModule } from './core/core.module';
-import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDM6_xjtCiBzXHhTpOjFJKDqZb0ebZhEKo",
+  authDomain: "shopping-lists-5e24c.firebaseapp.com",
+  databaseURL: "https://shopping-lists-5e24c.firebaseio.com",
+  projectId: "shopping-lists-5e24c",
+  storageBucket: "shopping-lists-5e24c.appspot.com",
+  messagingSenderId: "1033770670547",
+  appId: "1:1033770670547:web:e06fa150fbdd96c3b83726",
+  measurementId: "G-TGMFHL2FG3"
+};
 
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
-    swipe: { direction: Hammer.DIRECTION_ALL },
+  overrides = {
+    swipe: { direction: Hammer.DIRECTION_ALL }
   };
 }
 
@@ -35,7 +46,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     ShoppingListsModule,
     RouterModule.forRoot(APP_ROUTES),
     BrowserAnimationsModule,
-    HammerModule
+    HammerModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [
     {
