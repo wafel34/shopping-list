@@ -17,7 +17,7 @@ import { IUser } from 'src/app/shared/models/user/user';
   providedIn: 'root',
 })
 export class AuthService {
-  user$: Observable<IUser>;
+  user$: Observable<IUser|null>;
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -58,5 +58,9 @@ export class AuthService {
     };
 
     return userRef.set(data, { merge: true });
+  }
+
+  getUser(): Observable<IUser|null> {
+    return this.user$;
   }
 }
