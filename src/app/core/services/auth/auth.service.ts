@@ -17,7 +17,7 @@ import { IUser } from 'src/app/shared/models/user/user';
   providedIn: 'root',
 })
 export class AuthService {
-  user$: Observable<IUser|null>;
+  private user$: Observable<IUser|null>;
 
   constructor(
     private angularFireAuth: AngularFireAuth,
