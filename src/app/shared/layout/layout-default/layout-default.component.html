@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
 
-    <div class="w-100 d-flex" *ngIf="authService.getUser() | async as user; else test">
+    <div class="w-100 d-flex" *ngIf="authService.user$ | async as user; else test">
         <button routerLink="/shopping-lists" mat-raised-button>Listy</button>
         <button mat-raised-button>+</button>
         <button class="ml-auto" mat-mini-fab (click)="authService.signOut()">

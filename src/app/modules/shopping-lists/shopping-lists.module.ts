@@ -9,7 +9,12 @@ import { ShoppingListsPageComponent } from './pages/shopping-lists-page/shopping
 
 
 @NgModule({
-  declarations: [ShoppingListDetailComponent, ShoppingListItemComponent, ShoppingListsComponent, ShoppingListsPageComponent],
+  declarations: [
+    ShoppingListDetailComponent,
+    ShoppingListItemComponent,
+    ShoppingListsComponent,
+    ShoppingListsPageComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,

@@ -7,11 +7,11 @@ import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IUser } from 'src/app/shared/models/user/user';
 
-describe('AuthGuard', () => {
+fdescribe('AuthGuard', () => {
   let guard: AuthGuard;
   let router: Router;
   const authService: any = {
-    getUser() {}
+    user$: of(null)
   };
   const routeStateMock: any = { snapshot: {}, url: '/cookies' };
 
@@ -36,8 +36,8 @@ describe('AuthGuard', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should return false and redirect to homepage if getUser() is null', () => {
-    spyOn(authService, 'getUser').and.returnValue(of(null));
+  it('should return false and redirect to homepage if user$ is null', () => {
+    authService.user$ = of(null);
     const routerSpy = spyOn(router, 'navigate');
 
     guard.canActivate(new ActivatedRouteSnapshot(), routeStateMock).subscribe((canActivate: boolean) => {
@@ -55,7 +55,7 @@ describe('AuthGuard', () => {
       photoURL: 'mockUrl'
     };
 
-    spyOn(authService, 'getUser').and.returnValue(of(user));
+    authService.user$ = of(user);
 
     guard.canActivate(new ActivatedRouteSnapshot(), routeStateMock).subscribe((canActivate: boolean) => {
       expect(canActivate).toEqual(true);
