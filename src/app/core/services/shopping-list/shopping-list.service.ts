@@ -24,20 +24,9 @@ export class ShoppingListService {
   }
 
   archiveListItem(item: IShoppingListItem) {
-    item.status = 'archived';
-    const newArr = [
-      ...this.getSingleListValue().items.filter(listItem => listItem.id !== item.id),
-      item
-    ];
-
-    const newOb = {
-      items: newArr
-    };
-
-    this.setSingleListValue(newOb);
   }
 
-  getShoppingLists(userName: string) {
+  getShoppingLists(userName: string): Observable<IShoppingList[]> {
     return this.shoppingListRepository.getLists(userName);
   }
 

@@ -3,12 +3,14 @@
         <span>Produkt</span>
         <span class="ml-auto mr-3">Ilość</span>
     </div>
-    <mat-list *ngFor="let category of shoppingList.groups">
+
+
+    <mat-list *ngFor="let store of shoppingList.stores">
         <mat-list-item class="font-weight-bold">
-            {{category.group}}
+            {{store.name}}
         </mat-list-item>
         <app-shopping-list-item
-            *ngFor="let item of category.items"
+            *ngFor="let item of store.items"
             [item]="item"
             (itemRemovedFromList)="onItemRemovedFromList($event)"
             (itemReAddedToTheList)="onItemReAddedToTheList($event)"></app-shopping-list-item>

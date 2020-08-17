@@ -1,8 +1,6 @@
 export interface IShoppingListItem {
-    id: string;
-    store: string;
-    status: string;
     name: string;
     quantity: number;
+    unit: string;
     description: string | null;
 }
