@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { of, Observable, from } from 'rxjs';
 import { IShoppingList } from 'src/app/shared/models/shopping-list/shopping-list';
 import { HttpClient } from '@angular/common/http';
-import { AngularFirestore, AngularFirestoreDocument, CollectionReference, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, CollectionReference, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,19 @@ export class ShoppingListRepositoryService {
     return shoppingLists.valueChanges();
   }
 
-  removeList(id: string): Observable<IShoppingList> {
-    return this.httpService.delete<IShoppingList>(`shopping-lists/${id}`);
+  updateList(id: string, list: IShoppingList) {
+    console.log('update')
+    const shoppingLists: AngularFirestoreCollection<IShoppingList> = this.fireStore.collection('lists');
+    shoppingLists.doc(id).update(list);
+  }
+
+  createList(userId: string, list: any): Observable<DocumentReference> {
+    const shoppingLists: AngularFirestoreCollection<IShoppingList> = this.fireStore.collection('lists');
+
+    return from(shoppingLists.add({...list, users: [userId]}));
+  }
+
+  removeList(id: string) {
   }
 
 }

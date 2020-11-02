@@ -1,0 +1,56 @@
+<form [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="standard">
+        <mat-label>Nazwa Listy:</mat-label>
+        <input placeholder="Nazwa listy" matInput formControlName="name" />
+    </mat-form-field>
+    <ng-container formArrayName="stores">
+        <div *ngFor="let store of getStores().controls; index as i;">
+            <div [formGroupName]="i">
+                <mat-form-field appearance="standard">
+                    <mat-label>Nazwa Sklepu:</mat-label>
+                    <input matInput formControlName="name" id="{{ 'store-' + i}}"/>
+                </mat-form-field>
+
+                <ng-container formArrayName="items">
+                    <div *ngFor="let storeItem of getStoreItems(i).controls; index as j;">
+                        <ng-container [formGroupName]="j">
+                            
+                            <mat-form-field appearance="standard" class="productName">
+                                <mat-label>Produkt:</mat-label>
+                                <input matInput formControlName="name" />
+                            </mat-form-field>
+
+                            <mat-form-field appearance="standard" class="quantity">
+                                <mat-label>Ilość:</mat-label>
+                                <input matInput formControlName="quantity" type="number"/>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="standard" class="unit">
+                                <mat-label>Jednostka:</mat-label>
+                                <mat-select matInput formControlName="unit">
+                                    <mat-option *ngFor="let unit of units" [value]="unit">{{unit}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-checkbox formControlName="showDescription">
+                                <img class="descriptionIcon" src="assets/images/comment-solid.svg" alt="">
+                            </mat-checkbox>
+
+                            <button type="button" class="removeItemButton" (click)="removeStoreItem(i,j)">-</button>
+                            
+                            <mat-form-field *ngIf="getStoreItem(i, j).showDescription.value" appearance="standard">
+                                <mat-label>Opis:</mat-label>
+                                <input matInput formControlName="description" />
+                            </mat-form-field>
+
+                        </ng-container>
+                    </div>
+                    <button type="button" class="d-block w-100" mat-raised-button color="primary" (click)="addProduct(i);">Dodaj produkt</button>
+                </ng-container>
+            </div>
+          </div>
+    </ng-container>
+    <button type="button" class="d-block w-100 my-3" mat-raised-button color="primary" (click)="addStore();">Dodaj sklep</button>
+
+    <button type="submit">Submit</button>
+</form>

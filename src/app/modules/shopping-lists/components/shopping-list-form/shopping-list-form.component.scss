@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+.unit {
+    width: 20%;
+}
+.quantity {
+    width: 15%;
+}
+.productName {
+    width: 35%;
+}
+
+.descriptionIcon {
+    width: 24px;
+    margin-left: 4px;
+}
+
+.removeItemButton {
+    width: 32px;
+    height: 32px;
+    color: orangered;
+    font-weight: bold;
+    background: none;
+    border: 3px solid orangered;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-left: 8px;
+}

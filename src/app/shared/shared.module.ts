@@ -8,7 +8,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -22,7 +27,12 @@ import { RouterModule } from '@angular/router';
     MatExpansionModule,
     MatSnackBarModule,
     MatCardModule,
-    RouterModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     LayoutDefaultComponent,
@@ -31,7 +41,12 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

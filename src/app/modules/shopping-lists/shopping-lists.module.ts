@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { ShoppingListItemComponent } from './components/shopping-list-item/shopping-list-item.component';
 import { ShoppingListsComponent } from './components/shopping-lists/shopping-lists.component';
 import { ShoppingListsPageComponent } from './pages/shopping-lists-page/shopping-lists-page.component';
+import { ShoppingListEditComponent } from './components/shopping-list-edit/shopping-list-edit.component';
+import { ShoppingListFormComponent } from './components/shopping-list-form/shopping-list-form.component';
+import { ShoppingListAddComponent } from './components/shopping-list-add/shopping-list-add.component';
 
 
 @NgModule({
@@ -13,7 +16,10 @@ import { ShoppingListsPageComponent } from './pages/shopping-lists-page/shopping
     ShoppingListDetailComponent,
     ShoppingListItemComponent,
     ShoppingListsComponent,
-    ShoppingListsPageComponent
+    ShoppingListsPageComponent,
+    ShoppingListEditComponent,
+    ShoppingListFormComponent,
+    ShoppingListAddComponent
   ],
   imports: [
     CommonModule,

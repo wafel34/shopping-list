@@ -5,5 +5,5 @@ export interface IShoppingList {
     date: number;
     name: string;
     users: string[];
-    stores: {name: string, store_id: string, items: IShoppingListItem[]}
+    stores: {name: string, store_id: string, items: IShoppingListItem[]}[]
 }
