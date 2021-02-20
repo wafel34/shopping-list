@@ -1,20 +1,32 @@
-<form [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()">
+<form *ngIf="formDataLoaded" [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="standard">
         <mat-label>Nazwa Listy:</mat-label>
         <input placeholder="Nazwa listy" matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Wykonawca:</mat-label>
+      <input placeholder="Wpisz kontakt" matInput formControlName="assignee" [matAutocomplete]="auto"/>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+        <mat-option *ngFor="let contact of contacts" [value]="contact.uid">
+          {{contact.displayName}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
     <ng-container formArrayName="stores">
         <div *ngFor="let store of getStores().controls; index as i;">
             <div [formGroupName]="i">
                 <mat-form-field appearance="standard">
                     <mat-label>Nazwa Sklepu:</mat-label>
-                    <input matInput formControlName="name" id="{{ 'store-' + i}}"/>
+                    <mat-select formControlName="name">
+                        <mat-option *ngFor="let store of stores" [value]="store.id">{{store.name}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
 
                 <ng-container formArrayName="items">
                     <div *ngFor="let storeItem of getStoreItems(i).controls; index as j;">
                         <ng-container [formGroupName]="j">
-                            
+
                             <mat-form-field appearance="standard" class="productName">
                                 <mat-label>Produkt:</mat-label>
                                 <input matInput formControlName="name" />
@@ -33,11 +45,10 @@
                             </mat-form-field>
 
                             <mat-checkbox formControlName="showDescription">
-                                <img class="descriptionIcon" src="assets/images/comment-solid.svg" alt="">
                             </mat-checkbox>
 
                             <button type="button" class="removeItemButton" (click)="removeStoreItem(i,j)">-</button>
-                            
+
                             <mat-form-field *ngIf="getStoreItem(i, j).showDescription.value" appearance="standard">
                                 <mat-label>Opis:</mat-label>
                                 <input matInput formControlName="description" />
@@ -52,5 +63,7 @@
     </ng-container>
     <button type="button" class="d-block w-100 my-3" mat-raised-button color="primary" (click)="addStore();">Dodaj sklep</button>
 
-    <button type="submit">Submit</button>
+    <div class="submitButtonWrapper w-100 p-3 bg-light">
+        <button type="submit" class="d-block w-100 submitButton" mat-raised-button>Submit</button>
+    </div>
 </form>

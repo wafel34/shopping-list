@@ -28,3 +28,15 @@
     border-radius: 50%;
     margin-left: 8px;
 }
+
+.submitButtonWrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: mat-color($mat-grey, 300);
+    border-top: 1px solid mat-color($mat-grey, 700);
+}
+
+.submitButton {
+    background-color: mat-color($mat-green, 700);
+}

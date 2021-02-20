@@ -54,7 +54,7 @@ describe('AuthService', () => {
       email: 'test@mail.co',
       displayName: 'testUser',
       photoURL: 'testPhotoUrl'
-    }
+    };
     const setSpy = jasmine.createSpy();
     const routerSpy = spyOn(router, 'navigate');
     const docSpy = spyOn(fireStoreMock, 'doc').and.returnValue({

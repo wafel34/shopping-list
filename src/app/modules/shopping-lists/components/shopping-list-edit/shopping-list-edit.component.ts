@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { IShoppingList } from 'src/app/shared/models/shopping-list/shopping-list';
 import { ShoppingListService } from 'src/app/core/services/shopping-list/shopping-list.service';
 import { ActivatedRoute } from '@angular/router';
+import { IStore } from 'src/app/shared/models/stores/store';
+import {IUser} from '../../../../shared/models/user/user';
 
 @Component({
   selector: 'app-shopping-list-edit',
@@ -10,9 +12,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./shopping-list-edit.component.scss']
 })
 export class ShoppingListEditComponent implements OnInit {
-  shoppingList$: Observable<IShoppingList> = this.shoppingListService.getSingleList(this.router.snapshot.params.id);
 
-  constructor(private shoppingListService: ShoppingListService, private router: ActivatedRoute) {
+  formData$: Observable<[IUser[], IStore[], IShoppingList]> =
+    this.shoppingListService.getFormData(false, this.router.snapshot.params.id);
+
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private router: ActivatedRoute,
+    ) {
   }
 
   ngOnInit(): void {

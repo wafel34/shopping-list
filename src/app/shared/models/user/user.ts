@@ -1,6 +1,6 @@
-export interface IUser {
-    uid: string;
-    email: string;
-    displayName: string;
-    photoURL: string;
+import {IGoogleUser} from './google-user';
+
+
+export interface IUser extends IGoogleUser {
+  contacts: string[];
 }

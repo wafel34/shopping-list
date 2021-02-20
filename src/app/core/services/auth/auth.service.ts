@@ -11,7 +11,8 @@ import {
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { IUser } from 'src/app/shared/models/user/user';
+import { IGoogleUser } from '../../../shared/models/user/google-user';
+import {IUser} from '../../../shared/models/user/user';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class AuthService {
     private router: Router
   ) {
     this.user$ = this.angularFireAuth.authState.pipe(
-      switchMap((user: IUser) => {
+      switchMap((user: IGoogleUser) => {
         if (!user) {
           return of(null);
         }
@@ -37,7 +38,6 @@ export class AuthService {
   async googleSignIn(): Promise<boolean> {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.angularFireAuth.signInWithPopup(provider);
-
     await this.updateUserData(credential.user);
     return this.router.navigate(['/shopping-lists']);
   }
@@ -47,10 +47,10 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  updateUserData({ uid, email, displayName, photoURL }: IUser): Promise<void> {
-    const userRef: AngularFirestoreDocument<IUser> = this.angularFirestore.doc(`users/${uid}`);
+  updateUserData({ uid, email, displayName, photoURL }: IGoogleUser): Promise<void> {
+    const userRef: AngularFirestoreDocument<IGoogleUser> = this.angularFirestore.doc(`users/${uid}`);
 
-    const data: IUser = {
+    const data: IGoogleUser = {
       uid,
       email,
       displayName,

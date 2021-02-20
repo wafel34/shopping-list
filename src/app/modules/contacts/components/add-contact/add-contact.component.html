@@ -1,0 +1,17 @@
+<mat-form-field class="example-form-field">
+  <mat-label>Wyszukaj kontakt:</mat-label>
+  <input matInput type="text" (keyup)="onInput($event)">
+</mat-form-field>
+
+<h2>Kontakty</h2>
+<div *ngFor="let user of users$ | async">
+  <ng-container *ngIf="user$ | async as loggedInUser">
+    <mat-card *ngIf="loggedInUser.uid !== user.uid" class="d-flex align-items-center">
+    <img mat-card-avatar src="{{user.photoURL}}" class="mr-2">
+    <mat-card-title class="mb-0 mr-2">{{user.displayName}}</mat-card-title>
+      <button *ngIf="!loggedInUser.contacts.includes(user.uid)" mat-mini-fab class="ml-auto" color="primary"
+              (click)="addContact(loggedInUser.uid, user.uid)">+
+      </button>
+    </mat-card>
+  </ng-container>
+</div>

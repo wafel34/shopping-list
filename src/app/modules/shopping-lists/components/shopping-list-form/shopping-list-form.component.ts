@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IShoppingList } from 'src/app/shared/models/shopping-list/shopping-list';
-import { FormBuilder, FormGroup, FormArray, AbstractControl } from '@angular/forms';
-import { IShoppingListItem } from 'src/app/shared/models/shopping-list/shopping-list-item';
-import { EventEmitter } from '@angular/core';
-import { take } from 'rxjs/operators';
+import {Component, OnInit, Input, Output} from '@angular/core';
+import {Observable} from 'rxjs';
+import {IShoppingList} from 'src/app/shared/models/shopping-list/shopping-list';
+import {FormBuilder, FormGroup, FormArray, AbstractControl, Validators} from '@angular/forms';
+import {IShoppingListItem} from 'src/app/shared/models/shopping-list/shopping-list-item';
+import {EventEmitter} from '@angular/core';
+import {take} from 'rxjs/operators';
+import {IStore} from 'src/app/shared/models/stores/store';
+import {IUser} from '../../../../shared/models/user/user';
 
 @Component({
   selector: 'app-shopping-list-form',
@@ -12,8 +14,11 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./shopping-list-form.component.scss']
 })
 export class ShoppingListFormComponent implements OnInit {
-  @Input() shoppingList$: Observable<IShoppingList>;
+  @Input() formData$: Observable<[IUser[], IStore[], IShoppingList]>;
   @Output() formSubmit = new EventEmitter();
+  contacts: IUser[] = [];
+  stores: IStore[] = [];
+  shoppingList: IShoppingList;
   shoppingListForm: FormGroup;
   units: string[] = [
     'szt',
@@ -21,17 +26,29 @@ export class ShoppingListFormComponent implements OnInit {
     'g',
     'dg'
   ];
+  formDataLoaded = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
-    this._initForm();
-    this._fillForm();
+    this.formData$.pipe(
+      take(1)
+    )
+      .subscribe(([contacts, stores, shoppingList]) => {
+        this.formDataLoaded = true;
+        this.contacts = contacts;
+        this.stores = stores;
+        this.shoppingList = shoppingList;
+        this._initForm();
+        this._fillForm();
+      });
   }
 
   _initForm() {
     this.shoppingListForm = this.formBuilder.group({
-      name: this.formBuilder.control(''),
+      name: this.formBuilder.control(new Date().toLocaleDateString(), [Validators.required]),
+      assignee: this.formBuilder.control(''),
       stores: this.formBuilder.array([
         this._createStore()
       ])
@@ -50,12 +67,21 @@ export class ShoppingListFormComponent implements OnInit {
     return this.shoppingListForm.get(['stores', index, 'items']) as FormArray;
   }
 
-  getStoreItem(storeIndex: number, itemIndex: number): {[key: string]: AbstractControl} {
+  getStoreItem(storeIndex: number, itemIndex: number): { [key: string]: AbstractControl } {
     return (this.shoppingListForm.get(['stores', storeIndex, 'items', itemIndex]) as FormGroup).controls;
   }
 
   addProduct(index: number) {
     this.getStoreItems(index).push(this._createStoreItem());
+  }
+
+  displayFn(uid) {
+    if (!this.contacts) {
+      return '';
+    }
+    const userInfo = this.contacts.find(contact => contact.uid === uid);
+
+    return userInfo ? userInfo.displayName : '';
   }
 
   onSubmit() {
@@ -72,7 +98,7 @@ export class ShoppingListFormComponent implements OnInit {
 
   _createStore(): AbstractControl {
     return this.formBuilder.group({
-      name: this.formBuilder.control(''),
+      name: this.formBuilder.control('', [Validators.required]),
       items: this.formBuilder.array([
         this._createStoreItem()
       ])
@@ -81,50 +107,48 @@ export class ShoppingListFormComponent implements OnInit {
 
   _createStoreItem(): AbstractControl {
     return this.formBuilder.group({
-      name: this.formBuilder.control(''),
-      quantity: this.formBuilder.control(1),
-      unit: this.formBuilder.control('szt'),
+      name: this.formBuilder.control('', [Validators.required]),
+      quantity: this.formBuilder.control(1, [Validators.required]),
+      unit: this.formBuilder.control('szt', [Validators.required]),
       showDescription: this.formBuilder.control(false),
       description: this.formBuilder.control('')
     });
   }
 
   _fillForm(): void {
-    if (!this.shoppingList$) {
+    if (!this.shoppingList) {
       return;
     }
-    this.shoppingList$
-    .pipe(take(1))
-    .subscribe((list: IShoppingList) => {
-      const formValue = {
-        name: list.name,
-        stores: []
-      };
-      list.stores.forEach((store, index: number) => {
-        if (index > 0) {
-          this.addStore();
-        }
-        formValue.stores.push({
-          name: store.name,
-          items: store.items.map((item: IShoppingListItem, itemIndex: number) => {
-            if (itemIndex > 0) {
-              this.addProduct(index);
+    const list = this.shoppingList;
+    const formValue = {
+      name: list.name,
+      assignee: list.assignee,
+      stores: []
+    };
+    list.stores.forEach((store, index: number) => {
+      if (index > 0) {
+        this.addStore();
+      }
+      formValue.stores.push({
+        name: store.name,
+        items: store.items.map((item: IShoppingListItem, itemIndex: number) => {
+          if (itemIndex > 0) {
+            this.addProduct(index);
 
-            }
-            return {
-              name: item.name,
-              quantity: item.quantity,
-              unit: item.unit,
-              showDescription: item.description ? true : false,
-              description: item.description || ''
-            };
-          })
-        });
+          }
+          return {
+            name: item.name,
+            quantity: item.quantity,
+            unit: item.unit,
+            showDescription: !!item.description,
+            description: item.description || ''
+          };
+        })
       });
-
-
-      this.shoppingListForm.setValue(formValue);
     });
+
+
+    this.shoppingListForm.setValue(formValue);
   }
 
 }
