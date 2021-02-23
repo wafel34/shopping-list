@@ -10,46 +10,51 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 
 @NgModule({
-  declarations: [LayoutDefaultComponent],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatListModule,
-    MatExpansionModule,
-    MatSnackBarModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-    RouterModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    LayoutDefaultComponent,
-    MatButtonModule,
-    MatToolbarModule,
-    MatListModule,
-    MatExpansionModule,
-    MatSnackBarModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule
-  ]
+    declarations: [LayoutDefaultComponent, SpinnerComponent],
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatListModule,
+        MatExpansionModule,
+        MatSnackBarModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatAutocompleteModule,
+        MatProgressSpinnerModule,
+        RouterModule,
+        ReactiveFormsModule
+    ],
+    exports: [
+        LayoutDefaultComponent,
+        SpinnerComponent,
+        MatButtonModule,
+        MatToolbarModule,
+        MatListModule,
+        MatExpansionModule,
+        MatSnackBarModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatProgressSpinnerModule
+    ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

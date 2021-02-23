@@ -1,42 +1,75 @@
 @import '~@angular/material/theming';
 
 .unit {
-    width: 20%;
+  width: 20%;
 }
+
 .quantity {
-    width: 15%;
+  width: 15%;
 }
+
 .productName {
-    width: 35%;
+  width: 35%;
 }
 
 .descriptionIcon {
-    width: 24px;
-    margin-left: 4px;
+  width: 24px;
+  margin-left: 4px;
 }
 
 .removeItemButton {
-    width: 32px;
-    height: 32px;
-    color: orangered;
-    font-weight: bold;
-    background: none;
-    border: 3px solid orangered;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin-left: 8px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 8px;
+  border: none;
 }
 
 .submitButtonWrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background-color: mat-color($mat-grey, 300);
-    border-top: 1px solid mat-color($mat-grey, 700);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: mat-color($mat-grey, 300);
+  border-top: 1px solid mat-color($mat-grey, 700);
 }
 
 .submitButton {
-    background-color: mat-color($mat-green, 700);
+  background-color: mat-color($mat-green, 700);
+}
+
+.itemsContainer {
+
+}
+.storeContainer,
+.listItem {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin: 8px 0;
+  padding: 0 8px;
+  border-radius: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.storeContainer {
+  padding-bottom: 8px;
+  margin: 8px;
+}
+
+.descriptionCheckbox {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  font-family: 'Roboto';
+  padding-top: 10px;
+  margin-left: 8px;
+}
+
+.descriptionCheckbox__text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  margin-bottom: 10px;
 }
