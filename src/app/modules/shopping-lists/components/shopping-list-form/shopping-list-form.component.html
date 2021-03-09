@@ -1,18 +1,21 @@
 <form *ngIf="formDataLoaded; else spinner;" [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="standard">
-        <mat-label>Nazwa Listy:</mat-label>
-        <input placeholder="Nazwa listy" matInput formControlName="name"/>
-    </mat-form-field>
+    <div class="container">
+        <mat-form-field appearance="standard">
+            <mat-label>Nazwa Listy:</mat-label>
+            <input placeholder="Nazwa listy" matInput formControlName="name"/>
+        </mat-form-field>
 
-    <mat-form-field appearance="standard">
-        <mat-label>Wykonawca:</mat-label>
-        <input placeholder="Wpisz kontakt" matInput formControlName="assignee" [matAutocomplete]="auto"/>
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
-            <mat-option *ngFor="let contact of contacts" [value]="contact.uid">
-                {{contact.displayName}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Wykonawca:</mat-label>
+            <input placeholder="Wpisz kontakt" matInput formControlName="assignee" [matAutocomplete]="auto"/>
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+                <mat-option *ngFor="let contact of contacts" [value]="contact.uid">
+                    {{contact.displayName}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+
     <ng-container formArrayName="stores">
         <div class="storeContainer" *ngFor="let store of getStores().controls; index as i;">
             <div [formGroupName]="i">
@@ -65,13 +68,15 @@
                         </ng-container>
                     </div>
                     <button type="button" class="d-block" mat-raised-button color="primary"
-                            (click)="addProduct(i);">Dodaj produkt
+                            (click)="addProduct(i);">
+                        Dodaj produkt
                     </button>
                 </div>
             </div>
         </div>
     </ng-container>
-    <button type="button" class="d-block w-100 my-3" mat-raised-button color="primary" (click)="addStore();">Dodaj sklep
+    <button type="button" class="d-block mx-auto my-3 px-5" mat-raised-button color="primary" (click)="addStore();">
+        Dodaj sklep
     </button>
 
     <div class="submitButtonWrapper w-100 p-3 bg-light">

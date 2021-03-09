@@ -34,9 +34,9 @@ export class ShoppingListRepositoryService {
       );
   }
 
-  updateList(id: string, list: IShoppingList) {
+  updateList(id: string, list: IShoppingList): Promise<void> {
     const shoppingLists: AngularFirestoreCollection<IShoppingList> = this.fireStore.collection('lists');
-    shoppingLists.doc(id).update(list);
+    return shoppingLists.doc(id).update(list);
   }
 
   createList(userId: string, list: any): Observable<void> {

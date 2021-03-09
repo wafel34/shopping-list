@@ -7,6 +7,7 @@ import { EventEmitter } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { IStore } from 'src/app/shared/models/stores/store';
 import { IUser } from '../../../../shared/models/user/user';
+import { UNITS } from '../../../../config/units';
 
 @Component({
     selector: 'app-shopping-list-form',
@@ -18,14 +19,10 @@ export class ShoppingListFormComponent implements OnInit {
     @Output() formSubmit = new EventEmitter();
     contacts: IUser[] = [];
     stores: IStore[] = [];
+    units: string[] = UNITS;
     shoppingList: IShoppingList;
     shoppingListForm: FormGroup;
-    units: string[] = [
-        'szt',
-        'kg',
-        'g',
-        'dg'
-    ];
+
     formDataLoaded = false;
 
     constructor(private formBuilder: FormBuilder) {

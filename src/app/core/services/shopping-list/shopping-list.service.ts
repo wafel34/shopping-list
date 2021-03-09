@@ -67,7 +67,7 @@ export class ShoppingListService {
     return this.shoppingListRepository.removeList(id);
   }
 
-  updateList(id: string, list: IShoppingList) {
+  updateList(id: string, list: IShoppingList): Promise<void> {
     return this.shoppingListRepository.updateList(id, list);
   }
 

@@ -1,1 +1,20 @@
-<app-shopping-list-form (formSubmit)="onFormSubmit($event)" [formData$]="formData$" ></app-shopping-list-form>
+<div *ngIf="formStatus === formStateStatus.DEFAULT">
+    <app-shopping-list-form (formSubmit)="onFormSubmit($event)" [formData$]="formData$" ></app-shopping-list-form>
+</div>
+
+<ng-container *ngIf="formStatus === formStateStatus.LOADING">
+    <app-spinner></app-spinner>
+</ng-container>
+
+<ng-container *ngIf="formStatus === formStateStatus.ERROR">
+    <h2>Ups, coś poszło nie tak!</h2>
+</ng-container>
+
+<ng-container *ngIf="formStatus === formStateStatus.SUCCESS">
+    <div class="container my-5 d-flex flex-column justify-content-center align-items-center">
+        <h2>Dodano pomyślnie</h2>
+        <a routerLink="/shopping-lists">Wróć do widoku list</a>
+    </div>
+</ng-container>
+
+
