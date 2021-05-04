@@ -4,7 +4,9 @@ import { IShoppingList } from 'src/app/shared/models/shopping-list/shopping-list
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreDocument, CollectionReference, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { firestore } from 'firebase';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { IShoppingListItem } from '../../../shared/models/shopping-list/shopping-list-item';
+import { IStore } from '../../../shared/models/stores/store';
 
 @Injectable({
   providedIn: 'root'
@@ -44,10 +46,31 @@ export class ShoppingListRepositoryService {
     const shoppingLists: AngularFirestoreCollection<IShoppingList> = this.fireStore.collection('lists');
     return from(shoppingLists.doc(documentId).set({
         ...list,
-        users: [userId],
+        creator: userId,
         date: firestore.Timestamp.now(),
         id: documentId
       }));
+  }
+
+  archiveListItem(item: IShoppingListItem, store: IStore, list: Observable<IShoppingList>) {
+    list.pipe(
+        take(1)
+    )
+        .subscribe(currentList => {
+          const newList: IShoppingList = {...currentList};
+          const newStore = newList.stores.find(currentStore => currentStore.name === store.name);
+
+          newStore.items = newStore.items.filter(storeItem => {
+            console.log( storeItem.name !== item.name);
+            return storeItem.name !== item.name;
+          });
+
+          console.log(newStore);
+          const document: AngularFirestoreDocument<IShoppingListItem> = this.fireStore.doc(`lists/${currentList.id}`);
+          return document.update(newList).then(() => console.log(('updated'))).catch(() => console.log('error kuwa'))
+        });
+
+
   }
 
   removeList(id: string) {

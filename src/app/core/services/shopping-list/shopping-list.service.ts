@@ -49,7 +49,8 @@ export class ShoppingListService {
     return result;
   }
 
-  archiveListItem(item: IShoppingListItem) {
+  archiveListItem(item: IShoppingListItem, store: IStore, list: Observable<IShoppingList>) {
+    this.shoppingListRepository.archiveListItem(item, store, list);
   }
 
   getShoppingLists(userName: string): Observable<IShoppingList[]> {

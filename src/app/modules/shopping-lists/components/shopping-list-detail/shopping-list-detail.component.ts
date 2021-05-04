@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IShoppingList } from 'src/app/shared/models/shopping-list/shopping-list';
 import { IShoppingListItem } from 'src/app/shared/models/shopping-list/shopping-list-item';
 import { ActivatedRoute } from '@angular/router';
+import { IStore } from '../../../../shared/models/stores/store';
 
 @Component({
   selector: 'app-shopping-list-detail',
@@ -12,16 +13,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ShoppingListDetailComponent {
   shoppingList$: Observable<IShoppingList> = this.shoppingListService.getSingleList(this.router.snapshot.params.id);
+  private timeout: number;
 
   constructor(private shoppingListService: ShoppingListService, private router: ActivatedRoute) {
   }
 
-  onItemRemovedFromList(item: IShoppingListItem) {
-    this.shoppingListService.archiveListItem(item);
+  onItemRemovedFromList(item: IShoppingListItem, store: IStore) {
+    this.timeout = setTimeout(() => {
+      this.shoppingListService.archiveListItem(item, store, this.shoppingList$);
+    }, 2000);
   }
 
-  onItemReAddedToTheList(item: IShoppingListItem) {
-    console.log(item);
+  onItemReAddedToTheList() {
+    console.log('item re-added');
+    clearTimeout(this.timeout);
   }
 
 }

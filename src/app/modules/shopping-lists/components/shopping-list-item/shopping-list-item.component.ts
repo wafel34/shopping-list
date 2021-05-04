@@ -5,44 +5,42 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar, MatSnackBarDismiss } from 
 
 
 @Component({
-  selector: 'app-shopping-list-item',
-  templateUrl: './shopping-list-item.component.html',
-  styleUrls: ['./shopping-list-item.component.scss']
+    selector: 'app-shopping-list-item',
+    templateUrl: './shopping-list-item.component.html',
+    styleUrls: ['./shopping-list-item.component.scss']
 })
-export class ShoppingListItemComponent  {
-  readonly STATE_VISIBLE = 'visible';
-  readonly STATE_HIDDEN = 'hidden';
-  private readonly SNACKBAR_VISIBILITY_DURATION = 2500;
+export class ShoppingListItemComponent {
+    readonly STATE_VISIBLE = 'visible';
+    readonly STATE_HIDDEN = 'hidden';
+    private readonly SNACKBAR_VISIBILITY_DURATION = 2500;
 
-  @Input() item: IShoppingListItem;
-  @Output() itemRemovedFromList = new EventEmitter<IShoppingListItem>();
-  @Output() itemReAddedToTheList = new EventEmitter<IShoppingListItem>();
+    @Input() item: IShoppingListItem;
+    @Output() itemRemovedFromList = new EventEmitter<IShoppingListItem>();
+    @Output() itemReAddedToTheList = new EventEmitter<IShoppingListItem>();
 
-  animationState: string;
-  private snackbar: MatSnackBarRef<SimpleSnackBar>;
+    animationState: string;
+    private snackbar: MatSnackBarRef<SimpleSnackBar>;
 
-
-  private emitTimeout;
-
-  constructor(private snackbarService: MatSnackBar, private cd: ChangeDetectorRef) {
-  }
-
-  startAnimation(state: string) {
-    if (this.animationState === this.STATE_HIDDEN) {
-      return;
+    constructor(private snackbarService: MatSnackBar, private cd: ChangeDetectorRef) {
     }
-    this.animationState = state;
 
+    startAnimation(state: string) {
+        if (this.animationState === this.STATE_HIDDEN) {
+            return;
+        }
+        this.animationState = state;
 
-    this.snackbar = this.snackbarService.open(`Zarchiwizowano: ${this.item.name}`, 'Cofnij', {duration: this.SNACKBAR_VISIBILITY_DURATION});
-    this.snackbar.onAction().subscribe(() => {
-      this.resetAnimation();
-      this.cd.detectChanges();
-    });
-  }
+        this.snackbar = this.snackbarService.open(`Zarchiwizowano: ${this.item.name}`, 'Cofnij', { duration: this.SNACKBAR_VISIBILITY_DURATION });
+        this.itemRemovedFromList.emit(this.item);
+        this.snackbar.onAction().subscribe(() => {
+            this.resetAnimation();
+            this.cd.detectChanges();
+            this.itemReAddedToTheList.emit(this.item);
+        });
+    }
 
-  resetAnimation() {
-    this.animationState = this.STATE_VISIBLE;
-  }
+    resetAnimation() {
+        this.animationState = this.STATE_VISIBLE;
+    }
 
 }
