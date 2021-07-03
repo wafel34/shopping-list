@@ -9,7 +9,7 @@
     <mat-card *ngIf="loggedInUser.uid !== user.uid" class="d-flex align-items-center">
     <img mat-card-avatar src="{{user.photoURL}}" class="mr-2">
     <mat-card-title class="mb-0 mr-2">{{user.displayName}}</mat-card-title>
-      <button *ngIf="loggedInUser.contacts && !loggedInUser.contacts.includes(user.uid)" mat-mini-fab class="ml-auto" color="primary"
+      <button *ngIf="!loggedInUser.contacts || !loggedInUser.contacts.includes(user.uid)" mat-mini-fab class="ml-auto" color="primary"
               (click)="addContact(loggedInUser.uid, user.uid)">+
       </button>
     </mat-card>

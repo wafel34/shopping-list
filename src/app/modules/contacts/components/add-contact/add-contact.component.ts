@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ContactsRepositoryService} from '../../../../core/repositories/contacts/contacts-repository.service';
-import {debounceTime, switchMap, take} from 'rxjs/operators';
+import {debounceTime, switchMap} from 'rxjs/operators';
 import {IUser} from '../../../../shared/models/user/user';
 import {Observable, Subject} from 'rxjs';
-import {$e} from 'codelyzer/angular/styles/chars';
 import {AuthService} from '../../../../core/services/auth/auth.service';
 
 @Component({

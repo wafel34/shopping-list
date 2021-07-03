@@ -29,10 +29,9 @@ export class ShoppingListFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.formData$.pipe(
-            take(1)
-        )
+        this.formData$
             .subscribe(([contacts, stores, shoppingList]) => {
+                console.log(contacts);
                 this.formDataLoaded = true;
                 this.contacts = contacts;
                 this.stores = stores;
@@ -73,6 +72,7 @@ export class ShoppingListFormComponent implements OnInit {
     }
 
     displayFn(uid) {
+        console.log(this.contacts);
         if (!this.contacts) {
             return '';
         }
