@@ -4,7 +4,6 @@ import { IShoppingList } from 'src/app/shared/models/shopping-list/shopping-list
 import { FormBuilder, FormGroup, FormArray, AbstractControl, Validators } from '@angular/forms';
 import { IShoppingListItem } from 'src/app/shared/models/shopping-list/shopping-list-item';
 import { EventEmitter } from '@angular/core';
-import { take } from 'rxjs/operators';
 import { IStore } from 'src/app/shared/models/stores/store';
 import { IUser } from '../../../../shared/models/user/user';
 import { UNITS } from '../../../../config/units';

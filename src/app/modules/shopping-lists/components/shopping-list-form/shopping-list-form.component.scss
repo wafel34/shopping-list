@@ -1,31 +1,21 @@
 @import '~@angular/material/theming';
 
+.form {
+  padding-bottom: 4rem;
+}
+
 .unit {
   width: 20%;
 }
 
 .quantity {
-  width: 15%;
+  width: 20%;
+  padding-right: 16px;
 }
 
 .productName {
-  width: 35%;
-}
-
-.descriptionIcon {
-  width: 24px;
-  margin-left: 4px;
-}
-
-.removeItemButton {
-  width: 32px;
-  height: 32px;
-  background: none;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 8px;
-  border: none;
+  width: 45%;
+  padding-right: 16px;
 }
 
 .submitButtonWrapper {
@@ -40,9 +30,6 @@
   background-color: mat-color($mat-green, 700);
 }
 
-.itemsContainer {
-
-}
 .storeContainer,
 .listItem {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -60,16 +47,5 @@
 }
 
 .descriptionCheckbox {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  font-family: 'Roboto';
-  padding-top: 10px;
-  margin-left: 8px;
-}
-
-.descriptionCheckbox__text {
-  color: rgba(0, 0, 0, 0.6);
-  font-size: 12px;
-  margin-bottom: 10px;
+  margin: 0 20px 0 4px;
 }

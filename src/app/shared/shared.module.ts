@@ -14,6 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -34,7 +36,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
         MatSelectModule,
         MatCheckboxModule,
         MatAutocompleteModule,
+        MatMenuModule,
         MatProgressSpinnerModule,
+        MatIconModule,
         RouterModule,
         ReactiveFormsModule
     ],
@@ -53,7 +57,9 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
         MatCheckboxModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatMenuModule,
+        MatIconModule
     ]
 })
 export class SharedModule {

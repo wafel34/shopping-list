@@ -1,4 +1,4 @@
-<form *ngIf="formDataLoaded; else spinner;" [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()">
+<form *ngIf="formDataLoaded; else spinner;" [formGroup]="shoppingListForm" (ngSubmit)="onSubmit()" class="form">
     <div class="container">
         <mat-form-field appearance="standard">
             <mat-label>Nazwa Listy:</mat-label>
@@ -46,16 +46,23 @@
                                 </mat-select>
                             </mat-form-field>
 
-                            <div class="descriptionCheckbox">
-                                <span class="descriptionCheckbox__text">Opis:</span>
-                                <mat-checkbox color="primary" formControlName="showDescription">
-                                </mat-checkbox>
+                            <div class="options">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Open menu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                   <div mat-menu-item>
+                                       <mat-checkbox class="descriptionCheckbox" color="primary" formControlName="showDescription">
+                                       </mat-checkbox>
+                                       <span class="descriptionCheckbox__text">Opis</span>
+                                   </div>
+                                    <button mat-menu-item type="button" (click)="removeStoreItem(i,j)">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>Usuń</span>
+                                    </button>
+                                </mat-menu>
                             </div>
 
-
-                            <button class="removeItemButton" type="button" (click)="removeStoreItem(i,j)">
-                                <img src="assets/images/trash-alt-regular.svg" alt="">
-                            </button>
                             <div>
 
                                 <mat-form-field *ngIf="getStoreItem(i, j).showDescription.value" appearance="standard">
@@ -63,7 +70,6 @@
                                     <input matInput formControlName="description"/>
                                 </mat-form-field>
                             </div>
-
 
                         </ng-container>
                     </div>
