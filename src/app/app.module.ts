@@ -31,7 +31,9 @@ const firebaseConfig = {
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
-    swipe: { direction: Hammer.DIRECTION_ALL }
+    swipe: { direction: Hammer.DIRECTION_ALL },
+    pinch: { enable: false },
+    rotate: { enable: false }
   };
 }
 

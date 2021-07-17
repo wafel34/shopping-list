@@ -30,9 +30,11 @@ export class ShoppingListRepositoryService {
     });
 
 
-    return  combineLatest([createdLists.valueChanges(), assignedLists.valueChanges()])
+    return combineLatest([createdLists.valueChanges(), assignedLists.valueChanges()])
       .pipe(
-        map(([createdResults, assignedResults]) => [...createdResults, ...assignedResults])
+        map(([createdResults, assignedResults]) => [...createdResults, ...assignedResults]
+            // TODO: sort in firebase query
+            .sort((resultA, resultB) => resultA.date > resultB.date ? -1 : 1))
       );
   }
 
@@ -65,9 +67,8 @@ export class ShoppingListRepositoryService {
             return storeItem.name !== item.name;
           });
 
-          console.log(newStore);
           const document: AngularFirestoreDocument<IShoppingListItem> = this.fireStore.doc(`lists/${currentList.id}`);
-          return document.update(newList).then(() => console.log(('updated'))).catch(() => console.log('error kuwa'))
+          return document.update(newList).then(() => console.log(('updated'))).catch(() => console.log('error in shopping list'));
         });
 
 
