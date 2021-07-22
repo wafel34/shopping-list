@@ -1,27 +1,27 @@
-# Client
+# Shopping List App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+This is a shopping list App built with Angular and Firebase. Demo at https://wafel34.github.io/shopping-list/
 
-## Development server
+The app can:
+* Add new/edit shopping lists
+* Authenticate users with Google Account
+* Add contacts (/contacts/add)
+* Update the list during shopping
+* Assing a user to the shopping list
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Runing project locally
+Just clone the repo and run 'ng serve' command.
 
-## Code scaffolding
+## Todo:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Add unit + e2e tests
+* Homepage + User Home Page UI
+* Ability to change the order of list items
+* Controls for adding user contacts in main navbar
+* Removing the list
+* General UI improvments
+* Sorting lists in Firebase
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+For other Angular app check: http://recipes-angular-app.herokuapp.com/ 
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
