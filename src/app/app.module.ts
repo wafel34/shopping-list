@@ -49,7 +49,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     HomeModule,
     ShoppingListsModule,
     ContactsModule,
-    RouterModule.forRoot(APP_ROUTES),
+    RouterModule.forRoot(APP_ROUTES, { relativeLinkResolution: 'legacy' }),
     BrowserAnimationsModule,
     HammerModule,
     AngularFireModule.initializeApp(firebaseConfig),

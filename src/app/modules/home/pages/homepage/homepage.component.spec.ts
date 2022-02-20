@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HomepageComponent } from './homepage.component';
 import { LayoutDefaultComponent } from 'src/app/shared/layout/layout-default/layout-default.component';
@@ -9,7 +9,7 @@ describe('HomepageComponent', () => {
   let component: HomepageComponent;
   let fixture: ComponentFixture<HomepageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HomepageComponent, LayoutDefaultComponent]
     })
