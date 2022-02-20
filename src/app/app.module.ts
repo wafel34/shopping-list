@@ -1,5 +1,5 @@
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
@@ -29,6 +29,7 @@ const firebaseConfig = {
   measurementId: 'G-TGMFHL2FG3'
 };
 
+@Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
     swipe: { direction: Hammer.DIRECTION_ALL },
